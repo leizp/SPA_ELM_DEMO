@@ -9,6 +9,12 @@ $.extend(cityListObj,{
 		$('li').click(function(){
 			debugger;
 		})
+
+
+
+
+
+		
 	},
 	readerCity:function(){
 

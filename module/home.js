@@ -8,37 +8,57 @@ var homeObj = {
 	bindEvent:function(){
 		var _this = this;
 		$('.city').click(function(){
-
-			//发送定位城市请求
-			$.ajax({
-				url:'/v1/cities?type=guess',
-				type:"GET",
-				success:function(res){
-					$('.nowCity').html(res.name);
-					location.href="#cityList";
-				},
-				error:function(){
-					alert('后端数据出错');
-				}
-			})
-			//发送热门城市ajax请求
-			$.ajax({
-				url:'/v1/cities?type=hot',
-				type:"GET",
-				success:function(res){
-					var str = '';
-					for(var i = 0 ; i < res.length; i ++){
-						str += '<li id="'+res[i].id+'">'+res[i].name+'</li>'
-						//console.log(res);
-						//此处一刷新页面就不在了需要存储
+			var nowCity = store('nowCity');
+			if(nowCity){
+				console.log(nowCity)
+				$('.nowCity').html(nowCity.name);
+				location.href="#cityList";
+			}else{
+				//发送定位城市请求
+				$.ajax({
+					url:'/v1/cities?type=guess',
+					type:"GET",
+					success:function(res){
+						store("nowCity",res);
+						$('.nowCity').html(res.name);
+						location.href="#cityList";
+					},
+					error:function(){
+						alert('后端数据出错');
 					}
-					$('.hotName').html(str);
-					location.href="#cityList";
-				},
-				error:function(){
-					alert('后端数据出错');
-				}
-			})
+				})			
+			}
+			var hotCity = store('hotCity');
+			if(hotCity){
+				var str = '';
+				console.log(hotCity);
+				for(var i = 0 ; i < hotCity.length; i ++){
+					str += '<li id="'+hotCity[i].id+'">'+hotCity[i].name+'</li>'
+					}
+				$('.hotName').html(str);
+				location.href="#cityList";
+			}else{
+				//发送热门城市ajax请求
+				$.ajax({
+					url:'/v1/cities?type=hot',
+					type:"GET",
+					success:function(res){
+						store('hotCity',res);
+						var str = '';
+						for(var i = 0 ; i < res.length; i ++){
+							str += '<li id="'+res[i].id+'">'+res[i].name+'</li>'
+							//console.log(res);
+							//此处一刷新页面就不在了需要存储
+						}
+						$('.hotName').html(str);
+						location.href="#cityList";
+					},
+					error:function(){
+						alert('后端数据出错');
+					}
+				})				
+			}
+
 			//发送所有城市ajax请求
 			
 			$.ajax({
