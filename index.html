@@ -7,17 +7,47 @@
 	<link rel="stylesheet" href="css/reset.css" />
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="css/home.css" />
+	<link rel="stylesheet" href="css/cityList.css" />
 </head>
 <body>
-	<div class="selection" id = "home" >首页</div>
-	<div class="selection" id = "cityList">城市列表页</div>
+	<div class="selection" id = "home" >
+		<div class = "home_logo"></div>
+		<div class = 'search'>
+			<article>选择城市：<a class="city">北京</a></article>
+			<form action="#">
+				<p class="searchBox">
+					<input type="text" placeholder='输入你的位置' id="txt"/>
+					<input type="button" value="搜索" id="btn"/>
+				</p>
+			</form>
+		</div>
+	</div>
+	<div class="selection" id = "cityList">
+		<header class="ListTop"></header>
+		<div class="guessCity"> &nbsp&nbsp当前定位城市: 
+			<span class="nowCity">北京</span>
+		</div>
+		<div class="hotCity">
+			<p>热门城市</p>
+			<ul class="hotName">
+			</ul>
+		</div>
+		<section class="cityGroup">
+			<p>A</p>
+			<ul class="GroupName">
+				
+			</ul>
+		</section>
+	</div>
 	<div class="selection" id = "address">地址搜素页</div>
 	<div class="selection" id = "shopList">商品列表页</div>
 	<div class="selection" id = "shopDetail">餐厅详情页</div>
 </body>
 <script src = "plugin/rem.js"></script>
 <script src = "plugin/director.js"></script>
+<script src = "plugin/fastclick.js"></script>
 <script src = "plugin/zepto.js"></script>
+<script src = "module/store.js"></script>
 <script src = "module/home.js"></script>
 <script src = "module/cityList.js"></script>
 <script src = "module/route.js"></script>

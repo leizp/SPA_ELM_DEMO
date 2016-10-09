@@ -32,7 +32,6 @@ var routeContral = (function(){
 				preModule = curModule;
 				curModule = module;
 				if(preModule){
-					debugger;
 					preModule.leave();
 				}
 				curModule.enter();

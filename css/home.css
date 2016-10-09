@@ -1,0 +1,64 @@
+#home{
+	background:url('https://faas.elemecdn.com/desktop/media/img/map.a76df5.png') no-repeat;
+	background-size:100% 100%;
+	position: relative;
+}
+.home_logo{
+	background:url('../img/ele.jpg') no-repeat;
+	background-size:100% 100%;
+	position: absolute;
+	height:8.533333rem;
+	width:8.533333rem;
+	top:8.533333rem;
+	left:3.84rem;
+	z-index: 5;
+	animation: move 1.5s 1 both;
+}
+@keyframes move{
+	0%{
+		top:8.533333rem;
+		left:3.84rem;
+
+	}
+	25%{
+		transform:scale(2);
+		border-radius: 50%;
+	}
+	100%{
+		top:1.066667rem;
+		left:1.066667rem;
+		border-radius: 50%;
+	}
+}
+.search{
+	position: absolute;
+	width: 100%;
+	height:auto;
+	top:45%;
+	left:5%;
+	z-index:2;
+}
+.city{
+	color:#fff;
+}
+.searchBox{
+	margin-top:0.32rem;
+	width:90%;
+	height:1.706667rem;
+	margin-right: 5%;
+	overflow:hidden;
+}
+input{
+	float:left;
+	height:100%;
+	outline:none;
+	border:none;
+}
+#txt{
+	width:80%;
+}
+#btn{
+	width:20%;
+	background:#e62625;
+	color:#fff;
+}
