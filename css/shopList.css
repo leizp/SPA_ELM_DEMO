@@ -1,0 +1,71 @@
+.hreader{
+	height:1.706667rem;
+	width:100%;
+	background:blue;
+}
+.active{
+	width: 100%;
+	height:6.4rem;
+	overflow-x:scroll;
+	box-sizing: border-box;
+}
+.shopTitle{
+	float:left;
+	width: 25%;
+	height:3.2rem;
+	box-sizing: border-box;
+}
+.shopTitle img{
+	display:block;
+	width:60%;
+	height:70%;
+	margin:0 auto;
+}
+.shopTitle h3{
+	width:100%;
+	height:30%;
+	font-size:0.533333rem;
+	line-height: 30%;
+	text-align: center;
+}
+.nearShopList{
+	width: 100%;
+	height:auto;
+	overflow:hidden;
+	margin-top:0.426667rem;
+}
+.nearShopList li{
+	list-style: none;
+	width: 96%;
+	padding:2%;
+	height:3.413333rem;
+	overflow: hidden;
+}
+.nearShopList li img{
+	float:left;
+	width: 3.4rem;
+	height:3.4rem;
+}
+.near_left{
+	float:left;
+	width: 10.666667rem;
+	margin-left:0.426667rem;
+	height:3.4rem;
+	display:flex;
+	flex-direction:column;
+}
+.near_left h4{
+	flex:1;
+	font-size: 0.746667rem;
+	line-height:0.8rem;
+}
+.near_left h5{
+	flex:1;
+	font-size: 0.5rem;
+	line-height: 0.7rem;
+}
+.near_left h6{
+	flex:1;
+	font-size: 0.5rem;
+	line-height: 0.7rem;
+}

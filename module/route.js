@@ -5,9 +5,9 @@ var routeContral = (function(){
 	var hashMap = {
 		'home':homeObj,
 		'cityList': cityListObj,
-		/*'address' : addressObj,
+		'address' : addressObj,
 		'shopList': shopListObj,
-		'shopDetail':shopDetailObj*/
+		'shopDetail':shopDetailObj
 	};
 	//存储两个变量存储当前模块和前一个模块
 	var curModule = null;
