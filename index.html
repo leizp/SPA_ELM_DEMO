@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<title>饿了吗</title>
 	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/animate.css" />
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="css/home.css" />
 	<link rel="stylesheet" href="css/cityList.css" />
@@ -15,16 +16,18 @@
 	<div class="selection" id = "home" >
 		<div class = "home_logo"></div>
 		<div class = 'search'>
-			<article>选择城市：<a class="city">北京</a></article>
+			<article> 选择城市：<a class="city">北京</a></article>
 			<form action="#">
 				<p class="searchBox">
-					<input type="text" placeholder='输入你的位置' id="txt"/>
+					<input type="text" placeholder='&nbsp输入你的位置' id="txt"/>
 					<input type="button" value="搜索" id="btn"/>
 				</p>
 			</form>
 		</div>
 	</div>
 	<div class="selection" id = "cityList">
+		<div class="star"></div>
+		<div class="starInner"></div>
 		<header class="ListTop"></header>
 		<div class="guessCity"> &nbsp&nbsp当前定位城市: 
 			<span class="nowCity" id='3'>北京</span>
@@ -35,10 +38,8 @@
 			</ul>
 		</div>
 		<section class="cityGroup">
-			<p>A</p>
-			<ul class="GroupName">
-				
-			</ul>
+			<div class='Group'>
+			</div>
 		</section>
 	</div>
 	<div class="selection" id = "address">
@@ -65,6 +66,7 @@
 	<div class="selection" id = "shopDetail">餐厅详情页</div>
 </body>
 <script src = "plugin/rem.js"></script>
+<script src = "plugin/iscroll.js"></script>
 <script src = "plugin/director.js"></script>
 <script src = "plugin/fastclick.js"></script>
 <script src = "plugin/zepto.js"></script>

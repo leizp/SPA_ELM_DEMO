@@ -19,11 +19,23 @@ $.extend(cityListObj,{
 						$('.nowCity').html(city);
 						$('.city')[0].id = this.id;
 						$('.city').html(city);
+						$('.ListTop').html(city);
 						location.href = '#home';
 					}
 				})(i)
 			}
-		})
+		});
+		window.myScrollFood = new IScroll('.cityGroup', {
+		    scrollbars: true,
+		    bounce: true,
+		    preventDefault: false, //让点击事件得以执行
+		    probeType:2, //让滚动条滚动正常
+		    interactiveScrollbars: true,
+			shrinkScrollbars: 'scale',
+			fadeScrollbars: true
+		});
+		//楼梯函数
+		this.star();
 	},
 	readerCity:function(){
 		this.positionCity();
@@ -84,14 +96,23 @@ $.extend(cityListObj,{
 		//发送所有城市ajax请求
 		var cityGroup = store('cityGroup');
 		if(cityGroup){
+			var str1 = '';
 			var str = '';
 			var arr = [];
-			for(var i in cityGroup){
-				str += '<p>'+i+'</p><ul>'+_this.redLi(cityGroup[i]) +'</ul>';
-				//console.log(res);
-				//此处一刷新页面就不在了需要存储
+			var brr = [];
+			for(var i in cityGroup){ 
+				arr.push(i.charCodeAt(0));
+
+			};
+			arr = arr.sort();
+			for(var i = 0 ; i < arr.length ; i++){
+				brr[i] = String.fromCharCode(arr[i]);
+				str1 += '<a href="#'+arr[i]+'">'+brr[i]+'</a>';
+				str += '<p id="'+arr[i]+'">'+brr[i]+'</p><ul>'+_this.redLi(cityGroup[brr[i]]) +'</ul>';
 			}
-			$('.cityGroup').html(str);
+			console.log(arr.length)
+			$('.Group').html(str);
+			$('.starInner').html(str1);
 		}else{
 			$.ajax({
 				url:'/v1/cities?type=group',
@@ -99,14 +120,19 @@ $.extend(cityListObj,{
 				success:function(res){
 					store('cityGroup',res);
 					var str = '';
-					for(var i in res){
-						//需要排序
-						console.log(i)
-						str += '<p>'+i+'</p><ul>'+_this.redLi(res[i]) +'</ul>';
-						//console.log(res);
-						//此处一刷新页面就不在了需要存储
+					var str1 = '';
+					var arr = [];
+					for(var i in res){ 
+						arr.push(i.charCodeAt(0));			   
+					};
+					arr = arr.sort();
+					for(var i = 0 ; i < arr.length ; i++){
+						arr[i] = String.fromCharCode(arr[i]);
+						str1 += '<p>'+arr[i]+'</p>';
+						str += '<p>'+arr[i]+'</p><ul>'+_this.redLi(res[arr[i]]) +'</ul>';
 					}
-					$('.cityGroup').html(str);
+					$('.Group').html(str);
+					$('.starInner').html(str1);
 				},
 				error:function(){
 					alert('后端数据出错');
@@ -120,6 +146,16 @@ $.extend(cityListObj,{
 			str += '<li id="'+arr[j].id+'">'+arr[j].name+'</li>';
 		}
 		return 	str;			
+	},
+	star:function(){
+		var _this = this;
+		setTimeout(function(){
+			for(var i = 0 ; i < $('.starInner a').length ;i ++){
+				$('.starInner a').eq(i).click(function(event){
+					console.log(this)
+					return false;
+				})
+			}
+		})
 	}
-
 })

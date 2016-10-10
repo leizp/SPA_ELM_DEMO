@@ -15,8 +15,8 @@ $.extend(shopListObj,{
 				var oLi = event.target.parentElement.parentElement;
 				//console.log(oLi.id);
 				var url = location.href;
-				var geohash = url.split('?')[1].split('&')[0].split('=')[1];
-				location.href = '#shopDetail?geohash ='+geohash+'&id='+oLi.id;
+				url = url.split('?')[1];
+				location.href = '#shopDetail?'+url+'&id='+oLi.id;
 
 			})
 		})
