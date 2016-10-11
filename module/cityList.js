@@ -150,12 +150,13 @@ $.extend(cityListObj,{
 	star:function(){
 		var _this = this;
 		setTimeout(function(){
-			for(var i = 0 ; i < $('.starInner a').length ;i ++){
+			/*for(var i = 0 ; i < $('.starInner a').length ;i ++){
 				$('.starInner a').eq(i).click(function(event){
 					console.log(this)
-					return false;
+					event.preventDefault()
+					//return false;
 				})
-			}
+			}*/
 		})
 	}
 })

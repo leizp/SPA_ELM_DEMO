@@ -1,7 +1,11 @@
 .hreader{
 	height:1.706667rem;
 	width:100%;
-	background:blue;
+	background:#3190e8;
+	line-height:1.706667rem;
+	color:#fff; 
+	font-size: 0.64rem;
+	text-align: center;
 }
 .active{
 	width: 100%;
@@ -31,7 +35,6 @@
 .nearShopList{
 	width: 100%;
 	height:auto;
-	overflow:hidden;
 	margin-top:0.426667rem;
 }
 .nearShopList li{
@@ -56,8 +59,9 @@
 }
 .near_left h4{
 	flex:1;
-	font-size: 0.746667rem;
+	font-size: 0.7rem;
 	line-height:0.8rem;
+	font-weight: bolder;
 }
 .near_left h5{
 	flex:1;

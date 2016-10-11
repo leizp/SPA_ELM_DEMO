@@ -4,13 +4,14 @@ $.extend(shopListObj,{
 	dom:$('#shopList'),
 	init:function(name){
 		console.log(name);
+		this.shopNameReader();
 		this.shopReader();
 		this.shopListReader();
 		this.bindEvent();
 	},
 	bindEvent:function(){
 		setTimeout(function(){
-			
+
 			$('.nearShopList').click(function(event){
 				var oLi = event.target.parentElement.parentElement;
 				//console.log(oLi.id);
@@ -18,9 +19,22 @@ $.extend(shopListObj,{
 				url = url.split('?')[1];
 				location.href = '#shopDetail?'+url+'&id='+oLi.id;
 
-			})
+			});
+		});
+	},
+	shopNameReader:function(){
+		var url = location.href;
+		$.ajax({
+			url:'/v2/pois/'+url.split('?')[1].split('&')[0].split('=')[1],
+			type:'GET',
+			success:function(res){
+				//console.log(res.name)
+				$('.hreader').html(res.name);
+			},
+			error:function(){
+				alert('后端错误！！');
+			}
 		})
-
 	},
 	shopReader:function(){
 		var url = location.href;
@@ -81,7 +95,7 @@ $.extend(shopListObj,{
 								'</div>'+
 							'</li>';
 				}
-				$('.nearShopList').html(str);
+				$('.nearShop').html(str);
 				console.log(res)
 			}
 		})

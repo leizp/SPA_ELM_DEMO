@@ -22,6 +22,10 @@ var routeContral = (function(){
 		/*if(name.indexof())*/
 		//模块加载判断
 		if(module){
+
+			/*if(name.match(/\d+/).length !== 0) {
+				module = hashMap['cityList']
+			}*/
 			//判断是否被实例化
 			if(typeof haveModule[name] === 'undefined'){
 				//证明没有被实例化-此时需要实例化
