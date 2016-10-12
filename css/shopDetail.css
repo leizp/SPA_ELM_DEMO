@@ -1,5 +1,6 @@
 #shopDetail{
 	overflow: hidden;
+	position:relative;
 }
 .Detail_title{
 	height:4.266667rem;
@@ -35,7 +36,7 @@
 	text-align: left;
 	line-height:0.853333rem;
 }
-.active{
+.tit_tips .act{
 	float:left;
 	border-radius: 50%;
 	text-align: center;
@@ -138,8 +139,14 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	border-left:solid 2px #ccc;
+	border-left:solid 3px #ccc;
 	box-sizing: border-box;
+}
+.shopDop_left .li{
+	color:#666;
+	background:#fff;
+	border-left:solid 3px #06a8c0;
+
 }
 .shopDop_right{
 	width:75%;
@@ -224,4 +231,88 @@
 	height:1rem;
 	width:1rem;
 	background:#ef3162;
+}
+.shopCar,.shopCarBottom{
+	width: 100%;
+	height:2.56rem;
+	box-sizing:border-box;
+	position:absolute;
+	left:0;
+	bottom:0;
+}
+.shopCarBottom{
+	background:#000;
+	opacity: 0.8;
+	z-index: 5;
+}
+.shopCar{
+	z-index: 10;
+}
+.shopCarWarp{
+	width:100%;
+	height:100%;
+	position: relative;
+}
+.carImg{
+	width:3rem;
+	height:3rem;
+	background:#000;
+	opacity: 0.8;
+	border:solid 5px #666;
+	position: absolute;
+	left:0.853333rem;
+	bottom:0;
+	text-align: center;
+	line-height:3rem; 
+	color:#fff;
+	border-radius: 50%;
+}
+.carInnerBox{
+	width:100%;
+	height:100%;
+	border-radius: 50%;
+	position: relative;
+}
+.carInnerBox em{
+	position: absolute;
+	display:block;
+	font-size: 
+	height:1.8rem;
+	color:#f4154f;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width:1.4rem;
+	line-height: 1rem;
+	font-size: 0.6rem;
+	left:0.82rem;
+	top:0.84rem;
+}
+.totalPrice{
+	height:1.5rem;
+	width:7rem;
+	line-height: 1.5rem;
+	font-size: 0.853333rem;
+	font-weight: bold;
+	color:#fff;
+	margin-left:4.5rem;
+}
+.sendSale{
+	height:1rem;
+	width:7rem;
+	font-size: 0.533333rem;
+	color:#fff;
+	margin-left:4.6rem;
+}
+.buyBtn{
+	position: absolute;
+	right:0;
+	top:0;
+	line-height: 2.8rem;
+	text-align: center;
+	width:3.84rem;
+	height:3rem;
+	background:#17f14f;
+	color:#fff;
+	font-weight: bold;
 }

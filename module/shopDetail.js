@@ -9,8 +9,9 @@ $.extend(shopDetailObj,{
 	},
 	bindEvent:function(){
 		this.TapChange();
+
 	},
-	readerPage:function(){
+	readerPage:function(){ //商品名称渲染
 		var url = location.href;
 		$.ajax({
 			url:'/shopping/restaurant/'+url.split('?')[1].split('&')[3].split('=')[1],
@@ -44,7 +45,7 @@ $.extend(shopDetailObj,{
 									+'</span>'+
 								'</div>'+
 								'<div class="tit_tips">'+
-									'<span class="active">减</span>'+
+									'<span class="act">减</span>'+
 									'<span>&nbsp满45元减12元</span>'+
 								'</div>'+
 							'</div>'+
@@ -60,7 +61,7 @@ $.extend(shopDetailObj,{
 			}
 		})
 	},
-	shoppingReader:function(){
+	shoppingReader:function(){//商品列表渲染
 		var _this = this;
 		var url = location.href;
 		$.ajax({
@@ -84,12 +85,14 @@ $.extend(shopDetailObj,{
 				}
 				$('.shopDop_left ul').html(str);
 				$('.shopDop_right_List').html(str1);
+				$('.shopDop_left li')[0].className = 'li';
 				_this.fnScroll();
+				_this.fnStar();
 				console.log(res)
 			}
 		})
 	},
-	TapChange:function(){
+	TapChange:function(){//选项卡切换
 		$('.tap_box').click(function(event){
 			if(event.target.innerText === '商品'){
 				$('.shoppingDop').show();
@@ -100,7 +103,7 @@ $.extend(shopDetailObj,{
 			}
 		})
 	},
-	readerStr:function(data){
+	readerStr:function(data){//内部字符串拼接
 			var str2 = '';
 			for(var j = 0 ; j < data.foods.length ; j++){
 				if(data.foods[j].image_path){
@@ -125,24 +128,15 @@ $.extend(shopDetailObj,{
 							'</p>'+
 							'<p class="price">'+
 								'<span>￥'+data.foods[j].specfoods[0].price+' </span>起'+
-								'<i><em>+</em><em>-</em></i>'+
+								'<i><em id="'+data.foods[j].category_id+'">+</em></i>'+
 							'</p>'+
 						'</dd>';								
 					}
 		return str2;		
 	},
-	fnScroll:function(){
+	fnScroll:function(){//滚动条代码
 			setTimeout(function(){
-			console.log('执行了此处代码')
-			window.myScrollFood = new IScroll('.shopDop_right', {
-			    scrollbars: true,
-			    bounce: true,
-			    preventDefault: false, //让点击事件得以执行
-			    probeType:2, //让滚动条滚动正常
-			    interactiveScrollbars: true,
-				shrinkScrollbars: 'scale',
-				fadeScrollbars: true
-			});
+			console.log('执行了此处代码');
 			window.myScrollFood = new IScroll('.shopDop_left', {
 			    scrollbars: true,
 			    bounce: true,
@@ -153,5 +147,35 @@ $.extend(shopDetailObj,{
 				fadeScrollbars: true
 			});
 		})
+	},
+	fnStar:function(){//楼梯函数
+		setTimeout(function(){
+			console.log('执行了1此处代码');
+			window.myScrollFood = new IScroll('.shopDop_right', {
+			    scrollbars: true,
+			    bounce: true,
+			    preventDefault: false, //让点击事件得以执行
+			    probeType:2, //让滚动条滚动正常
+			    interactiveScrollbars: true,
+				shrinkScrollbars: 'scale',
+				fadeScrollbars: true
+			});
+		});	
+
+		//点击函数
+		$('.shopDop_left').click(function(event){
+			$('.shopDop_left li').removeClass('li');
+			event.target.className = 'li';
+			for(var i = 0 ;i < $('.List_name').length ; i ++){
+				if($('.List_name')[i].innerText ===event.target.innerText ){
+					//console.log($('.List_name').eq(i).offset().top);
+					myScrollFood.scrollToElement($('.List_name')[i], 132.234375, 0, 0);
+				}
+			}
+		});
+		//滚动事件
+	},
+	shopCar:function(){
+
 	}
 })
