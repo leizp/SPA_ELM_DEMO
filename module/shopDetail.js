@@ -54,7 +54,7 @@ $.extend(shopDetailObj,{
 							+res.promotion_info
 							+'</div>';
 					$('.Detail_title').html(str);
-				console.log(res);
+				//console.log(res);
 			},
 			error:function(){
 				alert('后端数据出错！')
@@ -88,7 +88,9 @@ $.extend(shopDetailObj,{
 				$('.shopDop_left li')[0].className = 'li';
 				_this.fnScroll();
 				_this.fnStar();
-				console.log(res)
+				_this.shopCar();
+
+				//console.log(res)
 			}
 		})
 	},
@@ -122,13 +124,13 @@ $.extend(shopDetailObj,{
 							'<img src="//fuss10.elemecdn.com/'+img_url+'" alt="" />'+
 						'</dt>'+
 						'<dd>'+
-							'<p>'+data.foods[j].name+'</p>'+
+							'<p class="sigleName">'+data.foods[j].name+'</p>'+
 							'<p class="sel">'+
 								'月售'+data.foods[j].month_sales+'份<span>好评率'+data.foods[j].satisfy_rate+'%</span>'+
 							'</p>'+
 							'<p class="price">'+
-								'<span>￥'+data.foods[j].specfoods[0].price+' </span>起'+
-								'<i><em id="'+data.foods[j].category_id+'">+</em></i>'+
+							'<span>￥<b class="siglePrice">'+data.foods[j].specfoods[0].price+' </b></span>起'+
+							'<i><em id="'+data.foods[j].category_id+j+'" class="shopBtnE">+<b class="flayBox">+</b></em></i>'+
 							'</p>'+
 						'</dd>';								
 					}
@@ -176,6 +178,153 @@ $.extend(shopDetailObj,{
 		//滚动事件
 	},
 	shopCar:function(){
+		//第一步,实现点击购物车显示购物车页面
+		var oShopCar = {
+			oCar:$('.carImg'),
+			oShopDisplay:$('.shopDisplay'),
+			oDisplayNone:$('.displayNone'),
+			aShopList:[],//存储购物车的数组变量
+			init:function(){
+				this.bindEvent();
 
+			},
+			bindEvent:function(){
+				var _this = this;
+				this.oCar.click(function(){
+					//console.log('我点击了购物车');
+					_this.oShopDisplay.show();
+				});
+				this.oDisplayNone.click(function(){
+					_this.oShopDisplay.hide();
+				});
+				this.addClick();
+				setTimeout(function(){
+					_this.shopShowing();
+					_this.shoppingChange();
+				})
+			},
+			addClick:function(){
+				var _this = this;
+				for(var i = 0 ; i < $('.shopBtnE').length;i++){
+					(function(index){
+						$('.shopBtnE')[index].onclick = function(){
+							if(store(this.id)){
+								//console.log("购物车中已经有了");
+								var data = store(this.id);
+								data.num++;
+								store(this.id,data);
+								for(var j = 0 ; j < _this.aShopList.length;j++){
+									if(_this.aShopList[j].id == this.id){
+										_this.aShopList[j].num = store(this.id).num; 
+									};
+								};
+								store('arrShop',_this.aShopList);
+								//console.log(_this.aShopList)
+								_this.shopShowing();
+							}else{
+								var data = {
+										id:this.id,
+										name:$('.sigleName')[index].innerText,
+										price:$('.siglePrice')[index].innerText,
+										num:1
+									};
+								store(this.id,data);
+								_this.aShopList.push(store(this.id));
+								store('arrShop',_this.aShopList)
+								_this.shopShowing();
+								//console.log(_this.aShopList)
+							}
+						}
+					})(i)
+				}
+			},
+			shopStr:function(data){
+				var str = '';
+					str = '<li>'+
+							'<span>'+data.name+'</span>'+
+							'<span class="showUl_right">'+
+								'<i class="minus">-</i>'+
+								'<i class="'+data.id+'">'+data.num+'</i>'+
+								'<i class="plus">+</i>'+
+							'</span>'+
+						  '</li>';
+						  return str;
+			},
+			shopShowing:function(){//购物车显示渲染
+				var _this = this;
+				var str = '';
+				var totalNum = 0;
+				var totalPrice = 0;
+				if(store('arrShop')){
+					_this.aShopList = store('arrShop');
+					for(var i = 0 ; i < _this.aShopList.length ; i ++){
+						str += _this.shopStr(_this.aShopList[i]);
+						totalPrice += _this.aShopList[i].price*_this.aShopList[i].num;
+						totalNum += _this.aShopList[i].num;
+					}
+				}else{
+					for(var i = 0 ; i < _this.aShopList.length ; i ++){
+						str += _this.shopStr(_this.aShopList[i]);
+						totalPrice += _this.aShopList[i].price*_this.aShopList[i].num;
+						totalNum += _this.aShopList[i].num;
+					}
+				}
+				$('.shopCarShowUl').html(str);
+				$('.totalPrice span').html(totalPrice);
+				$('.carInnerBox em').html(totalNum);
+			},
+			shoppingChange:function(){//购物车的改变
+				var _this = this;
+				var fleg = true;
+				
+				$('.shopCarShowUl').click(function(event){
+						var tuchDom = event.target.parentElement.children[1];
+						if(event.target.className === "plus"){
+							var data = store(tuchDom.className);
+								data.num++;
+							for(var j = 0 ; j < _this.aShopList.length;j++){
+									if(_this.aShopList[j].id == tuchDom.className){
+										store(tuchDom.className,data);
+										_this.aShopList[j].num = store(tuchDom.className).num; 
+									};
+								};
+								store('arrShop',_this.aShopList);
+								_this.shopShowing();
+						}
+						if(event.target.className === "minus"){
+							var data = store(tuchDom.className);
+							if(data){
+								if(data.num == 0){
+									data.num = 0;
+								}else{
+									data.num--;
+								}
+							var brr = [];
+							for(var j = 0 ; j < _this.aShopList.length;j++){
+									if(_this.aShopList[j].id == tuchDom.className){
+										if(data.num === 0){
+											localStorage.removeItem(tuchDom.className);
+											//删除data元素为0的数组
+											
+											delete _this.aShopList[j];
+										
+										}else{
+											store(tuchDom.className,data);
+											_this.aShopList[j].num = store(tuchDom.className).num; 
+											console.log(store('arrShop'))
+										}
+									};
+									if(_this.aShopList[j] !== undefined){
+										brr.push(_this.aShopList[j]);
+									}
+								};
+								store('arrShop',brr);
+								_this.shopShowing();
+							}
+						}
+				})
+			}
+		}
+		oShopCar.init();
 	}
 })
