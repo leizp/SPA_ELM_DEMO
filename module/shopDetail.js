@@ -89,8 +89,6 @@ $.extend(shopDetailObj,{
 				_this.fnScroll();
 				_this.fnStar();
 				_this.shopCar();
-
-				//console.log(res)
 			}
 		})
 	},
@@ -137,8 +135,11 @@ $.extend(shopDetailObj,{
 		return str2;		
 	},
 	fnScroll:function(){//滚动条代码
-			setTimeout(function(){
+		setTimeout(function(){
 			console.log('执行了此处代码');
+			if(typeof myScrollFood !== 'undefined') {
+				myScrollFood.destroy(); //删掉
+			}
 			window.myScrollFood = new IScroll('.shopDop_left', {
 			    scrollbars: true,
 			    bounce: true,
@@ -147,12 +148,16 @@ $.extend(shopDetailObj,{
 			    interactiveScrollbars: true,
 				shrinkScrollbars: 'scale',
 				fadeScrollbars: true
-			});
-		})
+			
+			})
+		});
 	},
 	fnStar:function(){//楼梯函数
 		setTimeout(function(){
 			console.log('执行了1此处代码');
+			if(typeof myScrollFood !== 'undefined') {
+				myScrollFood.destroy(); //删掉
+			}
 			window.myScrollFood = new IScroll('.shopDop_right', {
 			    scrollbars: true,
 			    bounce: true,
@@ -162,8 +167,17 @@ $.extend(shopDetailObj,{
 				shrinkScrollbars: 'scale',
 				fadeScrollbars: true
 			});
-		});	
-
+			//滚动事件
+			myScrollFood.on('scrollEnd', function(){
+				console.log('我滚动结束了', this.y);
+			});
+			debugger;
+			myScrollFood.on("scroll",function(event){
+				debugger;
+				console.log("我滚动了！")
+			})
+		});
+		
 		//点击函数
 		$('.shopDop_left').click(function(event){
 			$('.shopDop_left li').removeClass('li');
@@ -175,7 +189,7 @@ $.extend(shopDetailObj,{
 				}
 			}
 		});
-		//滚动事件
+		
 	},
 	shopCar:function(){
 		//第一步,实现点击购物车显示购物车页面

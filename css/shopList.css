@@ -7,12 +7,7 @@
 	font-size: 0.64rem;
 	text-align: center;
 }
-.active{
-	width: 100%;
-	height:6.4rem;
-	overflow-x:scroll;
-	box-sizing: border-box;
-}
+
 .shopTitle{
 	float:left;
 	width: 25%;
@@ -72,4 +67,18 @@
 	flex:1;
 	font-size: 0.5rem;
 	line-height: 0.7rem;
+}
+.swiper-container{
+	width:100%;
+	height:6.4rem;
+}
+.slide1{
+	height:100%;
+	height:100%;
+	background:#e7e1e1;
+}
+.slide2{
+	height:100%;
+	height:100%;
+	background:#e7e1e1;
 }

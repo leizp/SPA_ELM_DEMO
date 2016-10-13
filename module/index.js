@@ -5,3 +5,7 @@ var route = new Router ({
 	}
 })
 route.init('home');
+/*Pace.on("done",function(){
+	console.log("进读条加载完成");
+	
+})*/

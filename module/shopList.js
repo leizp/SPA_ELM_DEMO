@@ -11,7 +11,6 @@ $.extend(shopListObj,{
 	},
 	bindEvent:function(){
 		setTimeout(function(){
-
 			$('.nearShopList').click(function(event){
 				var oLi = event.target.parentElement.parentElement;
 				//console.log(oLi.id);
@@ -48,13 +47,22 @@ $.extend(shopListObj,{
 			},
 			success:function(res){
 				var str = '';
-				for(var i = 0 ; i < res.length ; i++){
+				var str1 = '';
+				var sum = 8 ;
+				for(var i = 0 ; i < sum ; i++){
 					str += '<div class="shopTitle">'+
 								'<img src="https://fuss10.elemecdn.com'+res[i].image_url+'" alt="" />'+
 								'<h3>'+res[i].title+'</h3>'+
 							'</div>';
 				}
-				$('.active').html(str);
+				for(var i = sum ; i < res.length ; i++){
+					str1 += '<div class="shopTitle">'+
+								'<img src="https://fuss10.elemecdn.com'+res[i].image_url+'" alt="" />'+
+								'<h3>'+res[i].title+'</h3>'+
+							'</div>';
+				}				
+				$('.slide1').html(str);
+				$('.slide2').html(str1);
 				console.log(res);
 			},
 			error:function(){

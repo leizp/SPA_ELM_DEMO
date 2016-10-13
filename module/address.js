@@ -6,7 +6,6 @@ $.extend(addressObj,{
 		this.addresReader();
 	},
 	bindEvent:function(){
-
 	},
 	addresReader:function(){
 		var url = location.href;

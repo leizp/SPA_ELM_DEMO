@@ -3,9 +3,7 @@ $.extend(cityListObj,{
 	name:'我是城市列表页',
 	dom:$('#cityList'),
 	init:function(){
-		this.bindEvent();
 		this.readerCity();
-
 	},
 	bindEvent:function(){
 		setTimeout(function(){
@@ -15,7 +13,7 @@ $.extend(cityListObj,{
 				(function(index){
 					aLi[i].onclick = function(){
 						var city = this.innerText;
-						//console.log(this.innerText);
+						console.log(this.innerText);
 						$('.nowCity').html(city);
 						$('.city')[0].id = this.id;
 						$('.city').html(city);
@@ -24,23 +22,13 @@ $.extend(cityListObj,{
 					}
 				})(i)
 			}
-		});
-		window.myScrollFood = new IScroll('.cityGroup', {
-		    scrollbars: true,
-		    bounce: true,
-		    preventDefault: false, //让点击事件得以执行
-		    probeType:2, //让滚动条滚动正常
-		    interactiveScrollbars: true,
-			shrinkScrollbars: 'scale',
-			fadeScrollbars: true
-		});
-		//楼梯函数
-		this.star();
+		},2);
 	},
 	readerCity:function(){
 		this.positionCity();
 		this.hotCityReader();
 		this.cityGroupReader();
+		this.bindEvent();
 	},
 	positionCity:function(){
 		var nowCity = store('nowCity');
@@ -107,8 +95,8 @@ $.extend(cityListObj,{
 			arr = arr.sort();
 			for(var i = 0 ; i < arr.length ; i++){
 				brr[i] = String.fromCharCode(arr[i]);
-				str1 += '<a href="#'+arr[i]+'">'+brr[i]+'</a>';
-				str += '<p id="'+arr[i]+'">'+brr[i]+'</p><ul>'+_this.redLi(cityGroup[brr[i]]) +'</ul>';
+				str1 += '<a href = "#'+brr[i]+'">'+brr[i]+'</span>';
+				str += '<p id="'+brr[i]+'">'+brr[i]+'</p><ul>'+_this.redLi(cityGroup[brr[i]]) +'</ul>';
 			}
 			console.log(arr.length)
 			$('.Group').html(str);
@@ -131,8 +119,10 @@ $.extend(cityListObj,{
 						str1 += '<p>'+arr[i]+'</p>';
 						str += '<p>'+arr[i]+'</p><ul>'+_this.redLi(res[arr[i]]) +'</ul>';
 					}
+
 					$('.Group').html(str);
 					$('.starInner').html(str1);
+					
 				},
 				error:function(){
 					alert('后端数据出错');
@@ -145,18 +135,19 @@ $.extend(cityListObj,{
 		for(var j = 0 ; j < arr.length ; j++){
 			str += '<li id="'+arr[j].id+'">'+arr[j].name+'</li>';
 		}
-		return 	str;			
+		return 	str;
+
 	},
-	star:function(){
+	/*star:function(){
 		var _this = this;
 		setTimeout(function(){
-			/*for(var i = 0 ; i < $('.starInner a').length ;i ++){
-				$('.starInner a').eq(i).click(function(event){
-					console.log(this)
-					event.preventDefault()
-					//return false;
+			for(var i = 0 ; i < $('.starInner span').length ;i ++){
+				$('.starInner span').eq(i).click(function(event){
+					console.log(this.innerText);
+					//event.preventDefault()
+					return false;
 				})
-			}*/
+			}
 		})
-	}
+	}*/
 })

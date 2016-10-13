@@ -6,6 +6,7 @@
 	<title>饿了吗</title>
 	<link rel="stylesheet" href="css/reset.css" />
 	<link rel="stylesheet" href="css/animate.css" />
+	<link rel="stylesheet" href="css/swiper-3.3.1.min.css" />
 	<link rel="stylesheet" href="css/index.css" />
 	<link rel="stylesheet" href="css/home.css" />
 	<link rel="stylesheet" href="css/cityList.css" />
@@ -13,6 +14,8 @@
 	<link rel="stylesheet" href="css/shopList.css" />
 	<link rel="stylesheet" href="css/shopDetail.css" />
 	<link rel="stylesheet" href="iconfont/iconfont.css" />
+
+	<!-- <link rel="stylesheet" href="css/pace.css" /> -->
 </head>
 <body>
 	<div class="selection" id = "home" >
@@ -53,7 +56,15 @@
 	</div>
 	<div class="selection" id = "shopList">
 		<header class="hreader"></header>
-		<section class="active"></section>	
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide slide2"></div>
+		        <div class="swiper-slide slide1"></div>
+		   	</div>
+		   	<!-- 如果需要分页器 -->
+	    <div class="swiper-pagination"></div>
+		</div>	
+		
 		<footer class="nearShopList">
 			<ul class="nearShop"></ul>	
 		</footer>
@@ -156,6 +167,8 @@
 <script src = "plugin/director.js"></script>
 <script src = "plugin/fastclick.js"></script>
 <script src = "plugin/zepto.js"></script>
+<script src = "plugin/swiper-3.3.1.jquery.min.js"></script>
+<!-- <script src = "plugin/pace.js"></script> -->
 <script src = "module/store.js"></script>
 <script src = "module/home.js"></script>
 <script src = "module/shopList.js"></script>
@@ -164,4 +177,16 @@
 <script src = "module/cityList.js"></script>
 <script src = "module/route.js"></script>
 <script src = "module/index.js"></script>
+<script language="javascript"> 
+	var mySwiper = new Swiper('.swiper-container',{
+	effect : 'flip',
+	loop:true,
+	pagination : '.swiper-pagination',
+	flip: {
+	            slideShadows : true,
+	            limitRotation : true,
+	        }
+
+	})
+</script>
 </html>
