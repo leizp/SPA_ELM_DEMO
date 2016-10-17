@@ -3,13 +3,13 @@ $.extend(shopDetailObj,{
 	name:'我是商品列表页',
 	dom:$('#shopDetail'),
 	init:function(name){
+		var _this = this;
 		this.readerPage();
 		this.shoppingReader();
 		this.bindEvent();
 	},
 	bindEvent:function(){
 		this.TapChange();
-
 	},
 	readerPage:function(){ //商品名称渲染
 		var url = location.href;
@@ -135,12 +135,12 @@ $.extend(shopDetailObj,{
 		return str2;		
 	},
 	fnScroll:function(){//滚动条代码
-		setTimeout(function(){
+		//setTimeout(function(){});
 			console.log('执行了此处代码');
-			if(typeof myScrollFood !== 'undefined') {
-				myScrollFood.destroy(); //删掉
+			if(typeof myScroll !== 'undefined') {
+				myScroll.destroy(); //删掉
 			}
-			window.myScrollFood = new IScroll('.shopDop_left', {
+			window.myScroll = new IScroll('.shopDop_left', {
 			    scrollbars: true,
 			    bounce: true,
 			    preventDefault: false, //让点击事件得以执行
@@ -148,12 +148,10 @@ $.extend(shopDetailObj,{
 			    interactiveScrollbars: true,
 				shrinkScrollbars: 'scale',
 				fadeScrollbars: true
-			
 			})
-		});
 	},
 	fnStar:function(){//楼梯函数
-		setTimeout(function(){
+		//setTimeout(function(){});
 			console.log('执行了1此处代码');
 			if(typeof myScrollFood !== 'undefined') {
 				myScrollFood.destroy(); //删掉
@@ -167,26 +165,38 @@ $.extend(shopDetailObj,{
 				shrinkScrollbars: 'scale',
 				fadeScrollbars: true
 			});
-			//滚动事件
-			myScrollFood.on('scrollEnd', function(){
-				console.log('我滚动结束了', this.y);
-			});
-			debugger;
-			myScrollFood.on("scroll",function(event){
-				debugger;
-				console.log("我滚动了！")
-			})
-		});
+			var aList_name = $('.List_name');
+			var aShopList = $('.shopDop_left li');
+			var arrTop = [];
+			for(var i = 0 ; i < aList_name.length ; i++){
+					arrTop.push(aList_name[i].offsetTop)
+				}
+			console.log(arrTop);
+				myScrollFood.on("scroll",function(event){
+					for(var i = 0 ; i < arrTop.length;i++){
+						//console.log("我到顶部了"+Math.round(this.y)+"高度"+(-arrTop[i]));
+						//debugger;
+						if( Math.round(this.y) == -arrTop[i]){
+							console.log("我到顶部了"+this.y+i);
+							aShopList.removeClass("li");
+							aShopList.eq(i).addClass("li");
+						}
+					}
+				});
 		
 		//点击函数
 		$('.shopDop_left').click(function(event){
+			if(event.target.className === "shopDop_left"){
+				return false;
+			}else{
 			$('.shopDop_left li').removeClass('li');
-			event.target.className = 'li';
-			for(var i = 0 ;i < $('.List_name').length ; i ++){
-				if($('.List_name')[i].innerText ===event.target.innerText ){
-					//console.log($('.List_name').eq(i).offset().top);
-					myScrollFood.scrollToElement($('.List_name')[i], 132.234375, 0, 0);
-				}
+				event.target.className = 'li';
+				for(var i = 0 ;i < $('.List_name').length ; i ++){
+					if($('.List_name')[i].innerText ===event.target.innerText ){
+						//console.log($('.List_name').eq(i).offset().top);
+						myScrollFood.scrollToElement($('.List_name')[i], 132.234375, 0, 0);
+					}
+				}				
 			}
 		});
 		
@@ -319,9 +329,7 @@ $.extend(shopDetailObj,{
 										if(data.num === 0){
 											localStorage.removeItem(tuchDom.className);
 											//删除data元素为0的数组
-											
 											delete _this.aShopList[j];
-										
 										}else{
 											store(tuchDom.className,data);
 											_this.aShopList[j].num = store(tuchDom.className).num; 
